@@ -79,7 +79,7 @@ const onSearchFormSubmit = async event => {
         position: 'topRight',
         color: '#FFCE1B',
         maxWidth: '432px',
-        messageColor: '#ffffff',
+        messageColor: '#000000',
       });
 
       return;
@@ -110,9 +110,26 @@ const onSearchFormSubmit = async event => {
       refs.galleryList.children[0].getBoundingClientRect().height;
 
     if (page < totalPages) {
-      showLoadMoreButton();
-    }
+  showLoadMoreButton();
+} else {
+  hideLoadMoreButton();
+
+  iziToast.info({
+    message: "We're sorry, but you've reached the end of search results.",
+    position: 'topRight',
+    color: '#00FFFF',
+        maxWidth: '432px',
+        messageColor: '#000000',
+  });
+}
   } catch (error) {
+    iziToast.error({
+      message: 'Something went wrong. Please try again later.',
+      position: 'topRight',
+      color: '#EF4040',
+      maxWidth: '432px',
+      messageColor: '#ffffff',
+    });
     console.log(error.message);
   } finally {
     hideLoader();
